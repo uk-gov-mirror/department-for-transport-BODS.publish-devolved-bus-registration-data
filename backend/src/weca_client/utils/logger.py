@@ -21,6 +21,7 @@ else:
     )
 
 log = logging.getLogger("weca_client")
+log.setLevel(LOGGER_LEVEL)
 # Usage:
 # log.debug({"key": "value", "key2": "value2"})
 # log.info("this is info message")

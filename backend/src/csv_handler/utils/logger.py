@@ -21,3 +21,4 @@ else:
     )
 
 log = logging.getLogger("csv_handler")
+log.setLevel(LOGGER_LEVEL)
