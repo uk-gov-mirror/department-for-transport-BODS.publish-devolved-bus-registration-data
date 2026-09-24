@@ -706,7 +706,7 @@ class DBManager:
 
         if latest_only:
             subquery = records.subquery()
-            records = (
+            distinct_query = (
                 session.query(subquery)
                 .join(
                     PDBRDRegistration,
@@ -728,6 +728,11 @@ class DBManager:
                     desc(PDBRDRegistration.variation_number),
                 )
             )
+        
+            # Freeze this query into a completely new subquery boundary
+            records = distinct_query.subquery()
+            # Re-expose it as a clean selectable query object
+            records = session.query(records)
 
         if active_only:
             records = records.filter(
